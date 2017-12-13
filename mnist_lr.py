@@ -41,13 +41,17 @@ def graphing():
 
 
 def logistic_regression():
-    score_list = []
 
+    score_list = []
     clf = LogisticRegression(C=50 / x_train.shape[0], multi_class='multinomial', solver='sag', verbose=10, tol=0.1, max_iter=1)
     clf.fit(x_train, y_train)
     score = clf.score(x_test, y_test)
     score_list.append(score)
-
+    """
+        做1次iteration,2次iteration....到10次
+        如果只想做一次請將max_iter改成自己想跑的iteration數
+        並刪除下面的迴圈
+    """
     for i in range(2, 11):
         clf.set_params(max_iter=i)
         clf.fit(x_train, y_train)
